@@ -73,8 +73,8 @@ def main(argv=None):
 
     usage = "usage: %prog [options] in_filename"
     parser = OptionParser(usage=usage, version="%%prog %s" % '0.0.1')
-    parser.add_option("-i")
-    parser.add_option("-o")
+    parser.add_option("-i", "--input", help="Input mermaid file")
+    parser.add_option("-o", "--output", help="Output mermaid file. Filename extension should be one of; svg or jpeg (jpg)")  # TODO Imlplement; svg, png, jpeg (jpg), webp")
     parser.add_option("-v", "--verbose", action="store_true")
 
     (options, args) = parser.parse_args(argv[1:])
