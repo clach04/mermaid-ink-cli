@@ -10,6 +10,8 @@ Windows binaries maybe available from https://github.com/clach04/mermaid-ink-cli
     py -3 mmdc_ink.py -i gantt.mmd -o gantt.svg
     py -3 mmdc_ink.py -i graph.mmd -o graph.svg
 
+See below for a working [Pandoc](https://github.com/jgm/pandoc) sample (using a [third party pandoc filter](https://github.com/timofurrer/pandoc-mermaid-filter)).
+
 ## Building Windows EXE binaries
 
     pip install pyinstaller
