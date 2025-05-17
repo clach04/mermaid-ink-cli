@@ -107,7 +107,6 @@ def main(argv=None):
     #parser.add_option("-f", "--pdfFit", action="store_true")  # DEBUG this will be ignored, for use with https://github.com/pandoc-ext/diagram
 
     (options, args) = parser.parse_args(argv[1:])
-    #print('%r' % ((options, args),))
     verbose = options.verbose
     if DEBUG:
         verbose = True
@@ -139,7 +138,9 @@ def main(argv=None):
         image_type = None  # 'jpeg'  # jpg
 
     url = gen_pako_url(data, image_type=image_type)
-    print('%s' % (url,) )
+    if verbose:
+        print('%s' % (url,) )
+        log.info('url: %s', url)
 
     """
     f = urlopen(url)
