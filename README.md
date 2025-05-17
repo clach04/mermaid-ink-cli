@@ -66,6 +66,13 @@ Either override for the current session, or single run.
 I've not had much success with other filters as per Timo's readme comment.
 https://github.com/pandoc-ext/diagram partially works, svg's get exported but they are missing from the final html :-(
 
+### Pandoc and PDF notes
+
+Display options for outputing PDF:
+
+    > pandoc --pdf-engine --help
+    Argument of --pdf-engine must be one of wkhtmltopdf, weasyprint, pagedjs-cli, prince, pdflatex, lualatex, xelatex, latexmk, tectonic, pdfroff, typst, context
+
 ## Mermaid Example - Graph
 
 ```mermaid
