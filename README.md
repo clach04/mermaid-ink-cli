@@ -55,6 +55,12 @@ Either override for the current session, or single run.
 ### Pandoc sample
 
     pandoc README.md -o sample.html --filter pandoc-mermaid
+    pandoc README.md -o sample.html --filter pandoc-mermaid -w html5 --metadata pagetitle="Sample"
+
+    # Assuming PDF render/engine already installed and in the path - may need to use --pdf-engine
+    # Windows binaries for weasyprint available at https://github.com/Kozea/WeasyPrint
+    pandoc README.md -o sample.pdf --filter pandoc-mermaid -w html5 --metadata pagetitle="Sample"
+    pandoc README.md -o sample.pdf --filter pandoc-mermaid -w html5 --metadata pagetitle="Sample" --pdf-engine weasyprint
 
 
 I've not had much success with other filters as per Timo's readme comment.
