@@ -10,7 +10,7 @@ Windows binaries maybe available from https://github.com/clach04/mermaid-ink-cli
     py -3 mmdc_ink.py -i gantt.mmd -o gantt.svg
     py -3 mmdc_ink.py -i graph.mmd -o graph.svg
 
-See below for a working [Pandoc](https://github.com/jgm/pandoc) sample (using a [third party pandoc filter](https://github.com/timofurrer/pandoc-mermaid-filter)).
+See below for a working [Pandoc](https://github.com/jgm/pandoc) sample (using a [third party pandoc filter](https://github.com/clach04/pandoc-mermaid-filter)).
 
 ## Building Windows EXE binaries
 
@@ -19,7 +19,7 @@ See below for a working [Pandoc](https://github.com/jgm/pandoc) sample (using a 
 
 ## Pandoc filter
 
-To use with Pandoc, check out https://github.com/timofurrer/pandoc-mermaid-filter
+To use with Pandoc, check out https://github.com/timofurrer/pandoc-mermaid-filter - or my fork with some Windows notes https://github.com/clach04/pandoc-mermaid-filter
 Follow pandoc-mermaid-filter instructions, to get a "binary" built (whether thats and executable python script under Linux, or a Microsoft Windows binary .exe).
 Then override the Mermaid command line binary to the filter.
 
