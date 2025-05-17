@@ -1,6 +1,9 @@
 # mermaid-ink-cli
 
-[mermaid.ink](https://github.com/jihchi/mermaid.ink) cli client, with command line arguments similar to [mermaid-cli / mmdc](https://github.com/mermaid-js/mermaid-cli)
+
+[mermaid-ink-cli / mmdc_ink](https://github.com/clach04/mermaid-ink-cli) is a [mermaid.ink](https://github.com/jihchi/mermaid.ink) cli client, with command line arguments similar to [mermaid-cli / mmdc](https://github.com/mermaid-js/mermaid-cli)
+
+Windows binaries maybe available from https://github.com/clach04/mermaid-ink-cli/releases
 
 ## Usage
 
