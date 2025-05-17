@@ -99,7 +99,7 @@ def main(argv=None):
     DEBUG = False
 
     usage = "usage: %prog [options] in_filename"
-    parser = OptionParser(usage=usage, version="%%prog %s" % '0.0.1')
+    parser = OptionParser(usage=usage, version="%%prog %s" % '0.0.2')  # FIXME setup.py and central version string variable
     parser.add_option("-i", "--input", help="Input mermaid file")
     parser.add_option("-o", "--output", help="Output mermaid file. Filename extension should be one of; svg or jpeg (jpg)")  # TODO Imlplement; svg, png, jpeg (jpg), webp")
     parser.add_option("-v", "--verbose", action="store_true")
