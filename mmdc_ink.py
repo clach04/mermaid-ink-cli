@@ -83,10 +83,13 @@ def main(argv=None):
     if verbose:
         print('Python %s on %s' % (sys.version.replace('\n', ' - '), sys.platform))
 
-    print(options.i)
-    print(options.o)
-    in_filename = options.i
-    out_filename = options.o
+    if not options.input:
+        parser.error("-i/--input is required")
+    if not options.output:
+        parser.error("-o/--output is required")
+
+    in_filename = options.input
+    out_filename = options.output
 
     f = open(in_filename)  # assume correct encoding...
     data = f.read()
