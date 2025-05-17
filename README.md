@@ -5,6 +5,23 @@
 
 Windows binaries maybe available from https://github.com/clach04/mermaid-ink-cli/releases
 
+mmdc_ink is supports a sub-set of mmdc parameters to convert from Mermaid into SVG or JPEG (jpg) images.
+
+The cURL binary is required, curl is now installed by default for Microsoft Windows 11.
+
+A mermaid.ink server is required, control over the server to use is via the operating system environment variable `MERMAID_INK_URL`. It is recommended to set the root URL, without a trailing slash. Examples:
+
+Linux
+
+    # Assuming bourne/bash compatible shell
+    export MERMAID_INK_URL=https://mermaid.ink
+
+Windows
+
+    set MERMAID_INK_URL=https://mermaid.ink
+
+Use the `--verbose` flag to see the URL that will be used.
+
 ## Usage
 
     py -3 mmdc_ink.py -i gantt.mmd -o gantt.svg

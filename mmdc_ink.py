@@ -48,9 +48,10 @@ ch.setFormatter(formatter)
 log.addHandler(ch)
 
 CURL_BIN = os.path.expanduser(os.environ.get('CURL_BIN', 'curl'))
+MERMAID_INK_URL = os.environ.get('MERMAID_INK_URL', 'https://mermaid.ink')
 
 
-def gen_pako_url(in_str, image_type=None):  # TODO enum type for image_type?
+def gen_pako_url(in_str, image_type=None, server_url=MERMAID_INK_URL):  # TODO enum type for image_type?
     image_type = image_type or 'jpeg'
     if image_type not in ('jpeg', 'svg'):
         raise NotImplementedError('image_type %r not implemented/supported' % (image_type,))
@@ -64,9 +65,9 @@ def gen_pako_url(in_str, image_type=None):  # TODO enum type for image_type?
 
     #prefix = 'http://mermaid.live/view#pako:'
     if image_type == 'svg':
-        prefix = 'https://mermaid.ink/svg/pako:'
+        prefix = server_url + '/svg/pako:'
     else:
-        prefix = 'https://mermaid.ink/img/pako:'  # defaults to jpeg (jpg); options; jpeg (default), png, webp - Use /svg to get an SVG image
+        prefix = server_url + '/img/pako:'  # defaults to jpeg (jpg); options; jpeg (default), png, webp - Use /svg to get an SVG image
     #prefix = 'https://mermaid.ink/img?type=png/pako:'  # this does not work
     #postfix = '?type=png'  # Nor this
     link = prefix + encoded_str.decode('ascii').replace('+', '-').replace('/', '_')  # + postfix
