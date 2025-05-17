@@ -4,6 +4,7 @@
 
 import base64
 import json
+import logging
 import os
 from optparse import OptionParser
 import sys
@@ -21,6 +22,30 @@ import zlib
 # python -m pip install -e git+https://github.com/clach04/w2d.git#egg=w2d
 #import w2d
 
+# create logger
+log = logging.getLogger("mmic")
+log.setLevel(logging.DEBUG)
+disable_logging = False
+disable_logging = True  # TODO pickup from command line, env, config?
+if disable_logging:
+    log.setLevel(logging.NOTSET)  # only logs; WARNING, ERROR, CRITICAL
+    #log.setLevel(logging.INFO)  # logs; INFO, WARNING, ERROR, CRITICAL
+
+ch = logging.StreamHandler()  # use stdio
+
+if sys.version_info >= (2, 5):
+    # 2.5 added function name tracing
+    logging_fmt_str = "%(process)d %(thread)d %(asctime)s - %(name)s %(filename)s:%(lineno)d %(funcName)s() - %(levelname)s - %(message)s"
+else:
+    if JYTHON_RUNTIME_DETECTED:
+        # process is None under Jython 2.2
+        logging_fmt_str = "%(thread)d %(asctime)s - %(name)s %(filename)s:%(lineno)d - %(levelname)s - %(message)s"
+    else:
+        logging_fmt_str = "%(process)d %(thread)d %(asctime)s - %(name)s %(filename)s:%(lineno)d - %(levelname)s - %(message)s"
+
+formatter = logging.Formatter(logging_fmt_str)
+ch.setFormatter(formatter)
+log.addHandler(ch)
 
 CURL_BIN = os.path.expanduser(os.environ.get('CURL_BIN', 'curl'))
 
@@ -71,15 +96,22 @@ def main(argv=None):
     if argv is None:
         argv = sys.argv
 
+    DEBUG = False
+
     usage = "usage: %prog [options] in_filename"
     parser = OptionParser(usage=usage, version="%%prog %s" % '0.0.1')
     parser.add_option("-i", "--input", help="Input mermaid file")
     parser.add_option("-o", "--output", help="Output mermaid file. Filename extension should be one of; svg or jpeg (jpg)")  # TODO Imlplement; svg, png, jpeg (jpg), webp")
     parser.add_option("-v", "--verbose", action="store_true")
 
+    #parser.add_option("-f", "--pdfFit", action="store_true")  # DEBUG this will be ignored, for use with https://github.com/pandoc-ext/diagram
+
     (options, args) = parser.parse_args(argv[1:])
     #print('%r' % ((options, args),))
     verbose = options.verbose
+    if DEBUG:
+        verbose = True
+
     if verbose:
         print('Python %s on %s' % (sys.version.replace('\n', ' - '), sys.platform))
 
@@ -90,6 +122,12 @@ def main(argv=None):
 
     in_filename = options.input
     out_filename = options.output
+
+    if verbose:
+        print('in_filename: %s' % (in_filename,))
+        log.info('in_filename %s', in_filename)
+        print('out_filename: %s' % (out_filename,))
+        log.info('out_filename %s', out_filename)
 
     f = open(in_filename)  # assume correct encoding...
     data = f.read()
