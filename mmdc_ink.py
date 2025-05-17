@@ -53,7 +53,9 @@ MERMAID_INK_URL = os.environ.get('MERMAID_INK_URL', 'https://mermaid.ink')
 
 def gen_pako_url(in_str, image_type=None, server_url=MERMAID_INK_URL):  # TODO enum type for image_type?
     image_type = image_type or 'jpeg'
-    if image_type not in ('jpeg', 'svg'):
+    if image_type == 'jpg':
+        image_type = 'jpeg'
+    if image_type not in ('jpeg', 'png', 'svg', 'webp'):
         raise NotImplementedError('image_type %r not implemented/supported' % (image_type,))
 
     # https://docs.kroki.io/kroki/setup/encode-diagram/#python
@@ -66,11 +68,14 @@ def gen_pako_url(in_str, image_type=None, server_url=MERMAID_INK_URL):  # TODO e
     #prefix = 'http://mermaid.live/view#pako:'
     if image_type == 'svg':
         prefix = server_url + '/svg/pako:'
+        postfix = ''
     else:
         prefix = server_url + '/img/pako:'  # defaults to jpeg (jpg); options; jpeg (default), png, webp - Use /svg to get an SVG image
+        postfix = '?type=' + image_type
+
     #prefix = 'https://mermaid.ink/img?type=png/pako:'  # this does not work
     #postfix = '?type=png'  # Nor this
-    link = prefix + encoded_str.decode('ascii').replace('+', '-').replace('/', '_')  # + postfix
+    link = prefix + encoded_str.decode('ascii').replace('+', '-').replace('/', '_') + postfix
     return link
 
 CURL_HEADERS = {  # Windows 11, Release-Date: 2024-12-11 - curl 8.11.1 (Windows) libcurl/8.11.1 Schannel zlib/1.3 WinIDN
@@ -132,11 +137,14 @@ def main(argv=None):
     f = open(in_filename)  # assume correct encoding...
     data = f.read()
     f.close()
-    if out_filename.lower().endswith('svg'):
-        image_type = 'svg'
-    else:
-        # FIXME split file extension...
-        image_type = None  # 'jpeg'  # jpg
+
+    _dummy, file_extn = os.path.splitext(out_filename)
+    file_extn = file_extn.lower()
+    log.debug('file_extn %r', file_extn)
+    if not file_extn:
+        file_extn = '.svg'
+    _dummy, image_type = file_extn.split('.')
+    log.debug('file_extn %r', (_dummy, image_type))
 
     url = gen_pako_url(data, image_type=image_type)
     if verbose:
