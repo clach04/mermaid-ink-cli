@@ -73,9 +73,29 @@ Display options for outputing PDF:
     > pandoc --pdf-engine --help
     Argument of --pdf-engine must be one of wkhtmltopdf, weasyprint, pagedjs-cli, prince, pdflatex, lualatex, xelatex, latexmk, tectonic, pdfroff, typst, context
 
-## Mermaid Example - Graph
+## Mermaid Examples
+
+### Mermaid Example - Graph
 
 ```mermaid
 graph LR;
     A-->B;
+```
+
+### Mermaid Example - Graph Pandoc Dependencies
+
+```mermaid
+graph LR;
+    Pandoc+Mermaid-->Pandoc+Mermaid+PDF;
+    Pandoc+PDF-->Pandoc+Mermaid+PDF;
+
+    PDFengine-->Pandoc+PDF;
+    weasyprint-->PDFengine;
+    wkhtmltopdf(_or_ wkhtmltopdf)-->PDFengine;
+    etc-->PDFengine;
+
+    Pandoc-->Pandoc+Mermaid;
+    pandoc-mermaid-filter(Python pandoc-mermaid-filter)-->Pandoc+Mermaid;
+    mmdc_ink(**mmdc_ink** - _this_ tool)-->pandoc-mermaid-filter;
+    mmdc(*or* mermaid-cli/mmdc)-->pandoc-mermaid-filter;
 ```
