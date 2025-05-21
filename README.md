@@ -5,6 +5,7 @@
 For more infomation about Mermaid/mermaid.js see https://mermaid.js.org/intro/
 
 Windows binaries maybe available from https://github.com/clach04/mermaid-ink-cli/releases
+Windows binaries for mermaid filter available from [clach04 fork pandoc-mermaid-filter](https://github.com/clach04/pandoc-mermaid-filter/releases/tag/20250521)
 
 mmdc_ink is supports a sub-set of mmdc parameters to convert from Mermaid into SVG, png, webp, or JPEG (jpg) images.
 
