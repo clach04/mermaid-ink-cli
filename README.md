@@ -2,10 +2,11 @@
 
 
 [mermaid-ink-cli / mmdc_ink](https://github.com/clach04/mermaid-ink-cli) is a [mermaid.ink](https://github.com/jihchi/mermaid.ink) cli client, with command line arguments similar to [mermaid-cli / mmdc](https://github.com/mermaid-js/mermaid-cli)
+For more infomation about Mermaid/mermaid.js see https://mermaid.js.org/intro/
 
 Windows binaries maybe available from https://github.com/clach04/mermaid-ink-cli/releases
 
-mmdc_ink is supports a sub-set of mmdc parameters to convert from Mermaid into SVG or JPEG (jpg) images.
+mmdc_ink is supports a sub-set of mmdc parameters to convert from Mermaid into SVG, png, webp, or JPEG (jpg) images.
 
 The cURL binary is required, curl is now installed by default for Microsoft Windows 11.
 
@@ -57,11 +58,16 @@ Either override for the current session, or single run.
     pandoc README.md -o sample.html --filter pandoc-mermaid
     pandoc README.md -o sample.html --filter pandoc-mermaid -w html5 --metadata pagetitle="Sample"
 
+    pandoc README.md -o sample.html --embed-resources --standalone --filter pandoc-mermaid
+    pandoc README.md -o sample.html --embed-resources --standalone --filter pandoc-mermaid -w html5 --metadata pagetitle="Sample"
+
+NOTE1 html will use SVG, html5 will use PNG (this is likely a bug/limitation of pandoc-mermaid - **TODO** determine for sure).
+NOTE2 html image will likely be too large, html5 with png looks reasonable
+
     # Assuming PDF render/engine already installed and in the path - may need to use --pdf-engine
     # Windows binaries for weasyprint available at https://github.com/Kozea/WeasyPrint
     pandoc README.md -o sample.pdf --filter pandoc-mermaid -w html5 --metadata pagetitle="Sample"
     pandoc README.md -o sample.pdf --filter pandoc-mermaid -w html5 --metadata pagetitle="Sample" --pdf-engine weasyprint
-
 
 I've not had much success with other filters as per Timo's readme comment.
 https://github.com/pandoc-ext/diagram partially works, svg's get exported but they are missing from the final html :-(
